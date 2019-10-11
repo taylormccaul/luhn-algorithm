@@ -3,17 +3,39 @@
     <head>
         <meta charset="utf-8">
         <title>Luhn Algorithm</title>
+        <style>
+            .calc-div {
+                text-align: center;
+                border: 1px solid black;
+                width: 50vw;
+                height: 70vh;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            label, input, button {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+        </style>
     </head>
     <body>
-        <h1 id="header"></h1>
-        <label for="luhn-input">Input a 16-digit number.</label>
-        <input type="text" name="luhn-input" id="luhn-input" placeholder="1234 5678 1234 5678">
-        <button type="submit" name="submit-btn" id="submit-btn">Submit</button>
-
+        <div class="calc-div">
+            <h1>Luhn Algorithm Validator</h1>
+            <h2 id="header"></h2>
+            <label for="luhn-input">Input a 16-digit number.</label>
+            <input type="text" name="luhn-input" id="luhn-input" placeholder="1234 5678 1234 5678">
+            <button type="submit" name="submit-btn" id="submit-btn">Submit</button>
+            <p id="validator-p"></p>
+        </div>
         <script>
             let lInput = document.getElementById('luhn-input');
             let submitBtn = document.getElementById('submit-btn');
             let header = document.getElementById('header');
+            let valP = document.getElementById('validator-p');
             let lNum = lInput.value;
             let lReg = /\W|\s|[A-Z]/gi;
 
@@ -46,11 +68,13 @@
                 }
 
                 if (lNumResult % 10 === 0) {
-                    console.log("This number is valid!")
-                    console.log(lNumResult);
+                    valP.innerHTML = "This number is valid! " + lNumResult + " is evenly divisible by 10.";
+                    //console.log("This number is valid!")
+                    //console.log(lNumResult);
                 } else {
-                    console.log("This number is invalid! The remainder is " + (lNumResult % 10) + ".");
-                    console.log(lNumArr);
+                    valP.innerHTML = "This number is invalid! The remainder is " + (lNumResult % 10) + ".";
+                    //console.log("This number is invalid! The remainder is " + (lNumResult % 10) + ".");
+                    //console.log(lNumArr);
                 }
 
                 if (lNum.length <= 1 || lNum.length > 16) {
